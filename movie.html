@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  font-size: 20px;
+}
+.one {
+  width: 100px;
+  height: 30px;
+  background-color: green;
+}
+.movie-list {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 2px solid #73AD21;
+  background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+  <h3>Enter Movie Name</h3>
+  <input type="text" id="movieInput" name="moviename">
+  <br>
+  <button class="one" onclick="addarray()">Add Movie</button>
+  <button id="clearBtn">Clear</button>
+  <button id="submitBtn">Submit</button>
+  
+  <div class="movie-list" id="movieList"></div>
+  <div id="totalMovies"></div>
+</div>
+
+<script>
+  let arr = [];
+
+  function addarray() {
+    const movieName = document.getElementById("movieInput").value;
+    if (movieName) {
+      arr.push(movieName);
+      display();
+      document.getElementById("movieInput").value = '';
+    }
+    else{
+        alert("cannot be empty");
+    }
+  }
+
+  function display() {
+    const movieListDiv = document.getElementById("movieList");
+    movieListDiv.innerHTML = '';
+    arr.forEach(function(entry) {
+      const movieItem = document.createElement('div');
+      movieItem.textContent = entry;
+      movieListDiv.appendChild(movieItem);
+    });
+    document.getElementById("totalMovies").textContent = "Total Movies: " + arr.length;
+  }
+
+  function clearArray() {
+    arr = [];
+    display();
+    document.getElementById("movieInput").value = '';
+  }
+
+  function submitMovies() {
+    alert('Movies Submitted: ' + arr.join(', '));
+  }
+
+  document.getElementById("clearBtn").addEventListener('click', clearArray);
+  document.getElementById("submitBtn").addEventListener('click', submitMovies);
+</script>
+
+</body>
+</html>
